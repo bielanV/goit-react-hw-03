@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import ContactForm from './components/ContactForm/ContactForm';
 import SearchBox from './components/SearchBox/SearchBox';
 import ContactList from './components/ContactList/ContactList';
-import Contact from './components/Contact/Contact';
 import { nanoid } from 'nanoid';
 
 const initialUsers = [
@@ -60,20 +59,11 @@ const App = () => {
       <h1>Phonebook</h1>
       <ContactForm onAddProfile={onAddProfile} />
       <SearchBox filter={filter} setFilter={setFilter} />
-      <ContactList>
-        {filteredUsers.map((contactItem) => {
-          return (
-            <Contact
-              id={contactItem.id}
-              onHandleDelete={handleDelete}
-              key={contactItem.id}
-              name={contactItem.name}
-              number={contactItem.number}
-              formatPhoneNumber={formatPhoneNumber}
-            />
-          );
-        })}
-      </ContactList>
+      <ContactList
+        formatPhoneNumber={formatPhoneNumber}
+        handleDelete={handleDelete}
+        filteredUsers={filteredUsers}
+      />
     </div>
   );
 };
